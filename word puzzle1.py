@@ -1,60 +1,55 @@
-# Creativity addition: This program includes a random word selection feature.
-# The secret word is chosen from a list, making the game different each time it runs.
+# Creativity addition: The program randomly selects a secret word from a list,
+# allowing the game to have a different word each time it runs.
 
 import random
 
-print("Welcome to the word guessing game!\n")
+print("Welcome to the word guessing game!")
 
 # List of possible secret words
-words = ["mosiah", "temple", "nephi", "faith", "church"]
+words = ["mosiah", "temple", "nephi", "church", "faith"]
 
-# Select a secret word
+# Choose a random secret word
 secret_word = random.choice(words)
 
-# Count guesses
 guess_count = 0
 
-# Create initial hint using a loop
+# Generate the initial hint using a loop
 hint = ""
 for letter in secret_word:
     hint += "_ "
 
-print("Your hint is:", hint)
+print("\nYour hint is:", hint)
 
 guess = ""
 
-# Continue asking until the correct word is guessed
+# Continue looping until the correct guess is made
 while guess != secret_word:
-
     guess = input("What is your guess? ").lower()
     guess_count += 1
 
-    # Check if guess has the correct number of letters
+    # Check if the guess has the same number of letters
     if len(guess) != len(secret_word):
         print("Sorry, the guess must have the same number of letters as the secret word.\n")
         continue
 
-    # Check if the guess is correct
+    # Check if guess is correct
     if guess == secret_word:
         print("Congratulations! You guessed it!")
         print(f"It took you {guess_count} guesses.")
         break
 
-    # Generate hint
+    # Create hint
     hint = ""
 
     for i in range(len(secret_word)):
-
-        # Correct letter in the correct position
         if guess[i] == secret_word[i]:
+            # Correct letter and correct position
             hint += guess[i].upper() + " "
-
-        # Letter exists but is in the wrong position
         elif guess[i] in secret_word:
+            # Correct letter but wrong position
             hint += guess[i].lower() + " "
-
-        # Letter does not exist in the word
         else:
+            # Letter not in secret word
             hint += "_ "
 
     print("Your hint is:", hint)
